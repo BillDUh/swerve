@@ -33,20 +33,20 @@ public class SwerveJoystickCmd extends CommandBase {
     @Override
     public void execute() {
         // 1. Get real-time joystick inputs
-        double xSpeed = -MathUtil.applyDeadband(this.controller.getLeftY(), 0.05);
-        double ySpeed = -MathUtil.applyDeadband(this.controller.getLeftX(), 0.05);
+        double xSpeed = -MathUtil.applyDeadband(this.controller.getLeftY(), OIConstants.kDeadband);
+        double ySpeed = -MathUtil.applyDeadband(this.controller.getLeftX(), OIConstants.kDeadband);
         
-        double turningSpeed = -MathUtil.applyDeadband(this.controller.getRightX(), 0.05);
+        double turningSpeed = -MathUtil.applyDeadband(this.controller.getRightX(), OIConstants.kDeadband);
         
-        xSpeed = xLimiter.calculate(xSpeed) * DriveConstants.kTeleDriveMaxSpeedMetersPerSecond;
-        ySpeed = yLimiter.calculate(ySpeed) * DriveConstants.kTeleDriveMaxSpeedMetersPerSecond;
+        xSpeed = this.xLimiter.calculate(xSpeed) * DriveConstants.kTeleDriveMaxSpeedMetersPerSecond;
+        ySpeed = this.yLimiter.calculate(ySpeed) * DriveConstants.kTeleDriveMaxSpeedMetersPerSecond;
         turningSpeed = turningLimiter.calculate(turningSpeed)
                 * DriveConstants.kTeleDriveMaxAngularSpeedRadiansPerSecond;
 
         ChassisSpeeds chassisSpeeds;
         if (OIConstants.feild) {
             chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
-                    xSpeed, ySpeed, turningSpeed, swerveSubsystem.getRotation2d());
+                    xSpeed, ySpeed, turningSpeed, this.swerveSubsystem.getRotation2d());
             SmartDashboard.putNumber("xSpeed", xSpeed);
             SmartDashboard.putNumber("ySpeed", ySpeed);
             SmartDashboard.putNumber("turningSpeed", turningSpeed);
@@ -55,12 +55,12 @@ public class SwerveJoystickCmd extends CommandBase {
         }
         SwerveModuleState[] moduleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(chassisSpeeds);
 
-        swerveSubsystem.setModuleStates(moduleStates);
+        this.swerveSubsystem.setModuleStates(moduleStates);
     }
 
     @Override
     public void end(boolean interrupted) {
-        swerveSubsystem.stopModules();
+        this.swerveSubsystem.stopModules();
     }
 
     @Override
