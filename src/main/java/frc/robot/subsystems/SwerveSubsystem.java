@@ -67,7 +67,7 @@ public class SwerveSubsystem extends SubsystemBase {
         new Thread(() -> {
             try {
                 Thread.sleep(1000);
-                zeroHeading();
+                this.zeroHeading();
             } catch (Exception e) {
             }
         }).start();
@@ -95,30 +95,30 @@ public class SwerveSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        odometer.update(this.getRotation2d(), this.getModulePosition());
+        this.odometer.update(this.getRotation2d(), this.getModulePosition());
     }
 
     public void stopModules() {
-        frontLeft.stop();
-        frontRight.stop();
-        backLeft.stop();
-        backRight.stop();
+        this.frontLeft.stop();
+        this.frontRight.stop();
+        this.backLeft.stop();
+        this.backRight.stop();
     }
 
     public void setModuleStates(SwerveModuleState[] desiredStates) {
         SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, DriveConstants.kPhysicalMaxSpeedMetersPerSecond);
-        frontLeft.setDesiredState(desiredStates[0]);
-        frontRight.setDesiredState(desiredStates[1]);
-        backLeft.setDesiredState(desiredStates[2]);
-        backRight.setDesiredState(desiredStates[3]);
+        this.frontLeft.setDesiredState(desiredStates[0]);
+        this.frontRight.setDesiredState(desiredStates[1]);
+        this.backLeft.setDesiredState(desiredStates[2]);
+        this.backRight.setDesiredState(desiredStates[3]);
     }
 
     public SwerveModulePosition[] getModulePosition() {
         return new SwerveModulePosition[] {
-            frontLeft.getSwerverPosition(),
-            frontRight.getSwerverPosition(),
-            backLeft.getSwerverPosition(),
-            backRight.getSwerverPosition()
+            this.frontLeft.getSwerverPosition(),
+            this.frontRight.getSwerverPosition(),
+            this.backLeft.getSwerverPosition(),
+            this.backRight.getSwerverPosition()
         };
     };
 }

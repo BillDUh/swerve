@@ -7,8 +7,8 @@ import edu.wpi.first.math.util.Units;
 public final class Constants {
     public static final class ModuleConstants {
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
-        public static final double kDriveMotorGearRatio = 57 / 7;
-        public static final double kTurningMotorGearRatio = 1 ;
+        public static final double kDriveMotorGearRatio = 57.0 / 7.0;
+        public static final double kTurningMotorGearRatio = 1.0;
         public static final double kDriveEncoderRot2Meter = kWheelDiameterMeters / kDriveMotorGearRatio * Math.PI;
         public static final double kTurningEncoderRot2Rad = kTurningMotorGearRatio * 2 * Math.PI;
         public static final double kDriveEncoderRPM2MeterPerSec = kDriveEncoderRot2Meter / 60;
@@ -57,10 +57,10 @@ public final class Constants {
         public static final boolean kFrontRightDriveAbsoluteEncoderReversed = false;
         public static final boolean kBackRightDriveAbsoluteEncoderReversed = false;
 
-        public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = 2.11842746807007;
-        public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = 4.749204519293945;
-        public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = 1.576932249946439;
-        public static final double kBackRightDriveAbsoluteEncoderOffsetRad = 3.68462185250131;
+        public static final double kFrontLeftDriveAbsoluteEncoderOffsetRad = 122.34375;
+        public static final double kBackLeftDriveAbsoluteEncoderOffsetRad = 89.208984375;
+        public static final double kFrontRightDriveAbsoluteEncoderOffsetRad = 271.7578125;
+        public static final double kBackRightDriveAbsoluteEncoderOffsetRad = 211.640625;
 
         public static final double kPhysicalMaxSpeedMetersPerSecond = 1;//5
         public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 1 * 1 * Math.PI;//2
@@ -89,13 +89,6 @@ public final class Constants {
     }
 
     public static final class OIConstants {
-        public static final int kDriverControllerPort = 0;
-
-        public static final int kDriverYAxis = 1;
-        public static final int kDriverXAxis = 0;
-        public static final int kDriverRotAxis = 4;
-        public static final int kDriverFieldOrientedButtonIdx = 1;
-
         public static final double kDeadband = 0.05;
         public static final boolean feild = true;
     }
